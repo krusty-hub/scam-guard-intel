@@ -1,24 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { ScamlexLanding } from "@/components/scamlex-landing";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Scamlex — Scam Detection & Link Analysis" },
+      { name: "description", content: "Analyze suspicious messages and links with explainable heuristic detection, risk scoring, and browser protection." },
+      { property: "og:title", content: "Scamlex — Scam Detection & Link Analysis" },
+      { property: "og:description", content: "Catch suspicious messages, links, and deceptive web content before they become a problem." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "/" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [{ rel: "canonical", href: "/" }],
+  }),
+  component: ScamlexLanding,
 });
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
